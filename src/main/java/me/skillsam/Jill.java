@@ -1,5 +1,6 @@
 package me.skillsam;
 
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -21,14 +22,26 @@ public class Jill extends BasicGame {
 	{
 		super(title);
 	}
-	
-	public void render(GameContainer container, Graphics g) throws SlickException {
-		g.drawString("Hello World!, 20, 20");
-		arm1_1.draw();
+
+	@Override
+	public void init(GameContainer arg0) throws SlickException {
+		arm4_1 = new Image("src/main/resources/arm4_1.png");
+		
+	}
+
+	@Override
+	public void update(GameContainer arg0, int arg1) throws SlickException {
+		// TODO Auto-generated method stub
+		
 	}
 	
-	public static void(String[] args) throws SlickException {
-		AppContainer app = new AppGameContainer(new SetupClass("Setup test"));
+	public void render(GameContainer container, Graphics g) throws SlickException {
+		g.drawString("Hello World!", 20, 20);
+		arm4_1.draw();
+	}
+	
+	public static void main(String[] args) throws SlickException {
+		AppGameContainer app = new AppGameContainer(new Jill("Setup test"));
 		
 		app.setDisplayMode(800, 600, false);
 		app.setAlwaysRender(true);
