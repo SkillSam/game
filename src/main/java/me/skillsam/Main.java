@@ -3,6 +3,7 @@ package me.skillsam;
 import java.io.File;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -16,7 +17,7 @@ public class Main extends Application {
 		// create a DrawPane object. See DrawPane.java for details.
 		Buttons gui = new Buttons();
 		Progress progress = new Progress();
-
+		
 		// put gui on top of the rootPane
 		BorderPane rootPane = new BorderPane();
 		rootPane.setCenter(gui);
@@ -39,7 +40,7 @@ public class Main extends Application {
 		mediaPlayer.play();
 
 		// Create a scene and place rootPane in the stage
-		Scene scene = new Scene(rootPane, 600, 400);
+		Scene scene = new Scene(rootPane, 800, 600);
 
 		primaryStage.setTitle("Shape Drawing");
 		primaryStage.setScene(scene); // Place the scene in the stage
@@ -47,6 +48,6 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		Application.launch(args);
+		launch(args);
 	}
 }
