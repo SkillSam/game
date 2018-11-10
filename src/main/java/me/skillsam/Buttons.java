@@ -9,6 +9,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Insets;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Buttons extends BorderPane
 {
@@ -35,7 +36,11 @@ public class Buttons extends BorderPane
 		TilePane tilePane = new TilePane(Orientation.VERTICAL);
 		tilePane.setPadding(new Insets(90, 10, 10, 10));
 		tilePane.setVgap(30);
-		tilePane.getChildren().addAll(weight1, weight2, weight3, weight4, weight5);
+		ImageView imv = new ImageView();
+		File file = new File("src/main/resources/arm1_1.png");
+		Image image = new Image(file.toURI().toString());
+		imv.setImage(image);
+		tilePane.getChildren().addAll(weight1, weight2, weight3, weight4, weight5, imv);
 		this.setLeft(tilePane);
 		
 		/*imageList.add(new Image("src/main/resource/arm1_1.png"));
