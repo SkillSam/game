@@ -41,8 +41,7 @@ public class Progress extends Pane {
 		css.add(this.getClass().getResource("style.css").toExternalForm());
 		
 		this.setBarStyle(bar, ColorStyle.GREEN);
-		bar.setPrefWidth(600);
-		bar.setPrefHeight(50);
+		bar.setMinSize(600, 50);
 		bar.progressProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
@@ -61,7 +60,7 @@ public class Progress extends Pane {
 			
 		});
 		
-		vbox.getChildren().setAll(bar);
+		vbox.getChildren().add(bar);
 	}
 	
 }
