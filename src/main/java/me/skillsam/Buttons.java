@@ -38,14 +38,14 @@ public class Buttons extends BorderPane
 		tilePane.getChildren().addAll(weight1, weight2, weight3, weight4, weight5);
 		this.setLeft(tilePane);
 		
-		imageList.add(new Image("src/main/resource/arm1_1.png"));
+		/*imageList.add(new Image("src/main/resource/arm1_1.png"));
 		imageList.add(new Image("src/main/resource/arm1_2.png"));
 		imageList.add(new Image("src/main/resource/arm2_1.png"));
 		imageList.add(new Image("src/main/resource/arm2_2.png"));
 		imageList.add(new Image("src/main/resource/arm3_1.png"));
 		imageList.add(new Image("src/main/resource/arm3_2.png"));
 		imageList.add(new Image("src/main/resource/arm4_1.png"));
-		imageList.add(new Image("src/main/resource/arm4_2.png"));
+		imageList.add(new Image("src/main/resource/arm4_2.png"));*/
 		
 
 	}
