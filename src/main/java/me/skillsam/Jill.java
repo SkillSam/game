@@ -37,7 +37,7 @@ public class Jill extends BasicGame {
 	
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.drawString("Hello World!", 20, 20);
-		arm4_1.draw();
+		g.drawImage(arm4_1, 100, 100);
 	}
 	
 	public static void main(String[] args) throws SlickException {
