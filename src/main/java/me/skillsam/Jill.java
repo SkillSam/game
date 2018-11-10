@@ -1,6 +1,10 @@
 package me.skillsam;
 
-//import javafx.scene.image.Image;
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Jill extends BasicGame {
 	
@@ -13,13 +17,9 @@ public class Jill extends BasicGame {
 	private Image arm4_1 = null;
 	private Image arm4_2 = null;
 	
-	public SetupClass(String title)
+	public Jill(String title)
 	{
 		super(title);
-	}
-	
-	public void init(GameContainer container) throws SlickException {
-		arm1_1 = new Image("src/main/resources/arm1_1.png");
 	}
 	
 	public void render(GameContainer container, Graphics g) throws SlickException {
