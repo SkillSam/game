@@ -1,6 +1,18 @@
 package me.skillsam;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.*;
+
 public class Main {
+	
+	public void start() {
+		try {
+			Display.create();
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public static void main(String[] args) {
 		int counter = 0, sum = 0;
