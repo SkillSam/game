@@ -3,6 +3,9 @@ package me.skillsam;
 import java.io.File;
 import java.util.ArrayList;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -14,30 +17,33 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.media.AudioClip;
+import javafx.util.Duration;
 
 public class Buttons extends BorderPane {
 	private ToggleGroup group;
 	private Main main;
-	
+
 	private ImageView view;
 	private ArrayList<Image> armImages;
-	
+
 	private AudioClip ac, cheer;
-	
+
 	private int armIndex = 1;
 
 	private ToggleButton weight1, weight2, weight3, weight4, weight5;
+	
+	private long lastClick = 0;
 
 	public Buttons(Main main) {
 		this.main = main;
 		this.armImages = this.main.getAI().getList();
 		this.view = new ImageView(this.armImages.get(0));
 		group = new ToggleGroup();
-		
-		//sounds
+
+		// sounds
 		ac = new AudioClip("file:src/main/resources/woosh.mp3");
 		ac.setVolume(0.5);
-		
+
 		cheer = new AudioClip("file:src/main/resources/cheer.mp3");
 		cheer.setVolume(0.3);
 
@@ -98,15 +104,15 @@ public class Buttons extends BorderPane {
 		tilePane.setVgap(20);
 
 		ButtonHandler handler = new ButtonHandler(main.getProgress(), main.getScore());
-		
+
 		weight1.setOnMousePressed(handler);
 		weight2.setOnMousePressed(handler);
 		weight3.setOnMousePressed(handler);
 		weight4.setOnMousePressed(handler);
 		weight5.setOnMousePressed(handler);
-		
+
 		ArmHandler armHandler = new ArmHandler();
-		
+
 		weight1.setOnMouseReleased(armHandler);
 		weight2.setOnMouseReleased(armHandler);
 		weight3.setOnMouseReleased(armHandler);
@@ -116,15 +122,32 @@ public class Buttons extends BorderPane {
 		tilePane.getChildren().addAll(weight1, weight2, weight3, weight4, weight5);
 		this.setLeft(tilePane);
 		this.setCenter(view);
+		
+		Timeline clock = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				long diff = System.currentTimeMillis() - lastClick;
+				
+				if (diff > 2000) {
+					main.getProgress().changeEnergy(3);
+				}
+			}
+			
+		}));
+		
+		clock.setCycleCount(Timeline.INDEFINITE);
+		clock.play();
 	}
-	
+
 	private class ArmHandler implements EventHandler<MouseEvent> {
 
 		@Override
 		public void handle(MouseEvent event) {
 			view.setImage(armImages.get(armIndex - 1));
+			lastClick = System.currentTimeMillis();
 		}
-		
+
 	}
 
 	private class ButtonHandler implements EventHandler<MouseEvent> {
@@ -141,33 +164,35 @@ public class Buttons extends BorderPane {
 		public void handle(MouseEvent event) {
 			Object var = event.getSource();
 			ac.play();
-			
+
+			double multiplier = (double) (1.0 / this.score.getLevel());
+
 			if (var == weight1) {
-				this.progress.changeEnergy(-0.5);
+				this.progress.changeEnergy(-0.5 * multiplier);
 				this.score.addScore(5);
 			} else if (var == weight2) {
-				this.progress.changeEnergy(-1.0);
+				this.progress.changeEnergy(-1.0 * multiplier);
 				this.score.addScore(10);
 			} else if (var == weight3) {
-				this.progress.changeEnergy(-1.5);
+				this.progress.changeEnergy(-1.5 * multiplier);
 				this.score.addScore(15);
 			} else if (var == weight4) {
-				this.progress.changeEnergy(-2.0);
+				this.progress.changeEnergy(-2.0 * multiplier);
 				this.score.addScore(20);
 			} else if (var == weight5) {
-				this.progress.changeEnergy(-2.5);
+				this.progress.changeEnergy(-2.5 * multiplier);
 				this.score.addScore(25);
 			}
-			
+
 			view.setImage(armImages.get(armIndex));
 			if (this.score.ifLevelUp()) {
 				armIndex += 2;
 				cheer.play();
-				
-				if (armIndex > armImages.size() - 1) armIndex = armImages.size() - 1;
+
+				if (armIndex > armImages.size() - 1)
+					armIndex = armImages.size() - 1;
 			}
 		}
-
 
 	}
 }

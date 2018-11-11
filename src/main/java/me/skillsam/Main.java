@@ -23,14 +23,14 @@ public class Main extends Application {
 		// create a DrawPane object. See DrawPane.java for details.
 		this.score = new Score();
 		this.progress = new Progress(this.score);
-		
+
 		i = 0;
 		armIm = new ArmImages();
 		ArrayList<Image> aiList = armIm.getList();
-		
+
 		Buttons buttons = new Buttons(this);
 		Image currentAI = aiList.get(i);
-		
+
 		// put gui on top of the rootPane
 		rootPane = new BorderPane();
 		rootPane.setCenter(buttons);
@@ -54,7 +54,6 @@ public class Main extends Application {
 		mediaPlayer.setOnEndOfMedia(onEnd);
 		mediaPlayer.play();
 
-
 		// Create a scene and place rootPane in the stage
 		Scene scene = new Scene(rootPane, 900, 700);
 
@@ -63,19 +62,18 @@ public class Main extends Application {
 		primaryStage.show(); // Display the stage
 	}
 
-	public ArmImages getAI()
-	{
+	public ArmImages getAI() {
 		return armIm;
 	}
-	
+
 	public Progress getProgress() {
 		return this.progress;
 	}
-	
+
 	public Score getScore() {
 		return this.score;
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

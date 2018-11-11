@@ -23,6 +23,7 @@ public class Progress extends GridPane {
 	
 	private void setEnergy(double energy) {
 		this.energy = energy;
+		if (this.energy > this.maxEnergy) this.energy = this.maxEnergy;
 		if (this.energy < 0) this.energy = 0;
 	}
 	
@@ -72,6 +73,7 @@ public class Progress extends GridPane {
 			}
 			
 		});
+		
 		super.add(this.score.getLevelLabel(), 0, 0);
 		super.add(this.bar, 1, 0);
 		super.add(this.score.getScoreLabel(), 2, 0);
