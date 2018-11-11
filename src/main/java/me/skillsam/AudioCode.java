@@ -18,13 +18,16 @@ public class AudioCode extends Application{
 		
  		String sound = "src/main/resources/audio.mp3";
  		final Media file = new Media(new File(sound).toURI().toString());
+ 		
+		String sound2 = "src/main/resources/audio2.mp3";
+ 		final Media file2 = new Media(new File(sound2).toURI().toString());
 		mediaPlayer = new MediaPlayer(file);
 		mediaPlayer.setAutoPlay(true);
 		
 		Runnable onEnd = new Runnable() {
 			public void run() {
 				mediaPlayer.dispose();
-				mediaPlayer = new MediaPlayer(file);
+				mediaPlayer = new MediaPlayer(file2);
 				mediaPlayer.play();
 				mediaPlayer.setOnEndOfMedia(this);
 			}};
