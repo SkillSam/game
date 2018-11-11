@@ -5,15 +5,34 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.GridPane;
 
-public class Progress extends TilePane {
+public class Progress extends GridPane {
 	
 	private ProgressBar bar;
+	private Score score;
+	private double energy, maxEnergy;
 	
-	public Progress() {
+	public Progress(Score score) {
+		this.score = score;
 		this.bar = new ProgressBar(1);
+		this.energy = 100;
+		this.maxEnergy = 100;
 		this.start();
+	}
+	
+	private void setEnergy(double energy) {
+		this.energy = energy;
+		if (this.energy < 0) this.energy = 0;
+	}
+	
+	public void changeEnergy(double change) {
+		this.setEnergy(this.energy + change);
+		this.update();
+	}
+	
+	private void update() {
+		this.bar.setProgress(energy / maxEnergy);
 	}
 	
 	public ProgressBar getBar() {
@@ -35,7 +54,7 @@ public class Progress extends TilePane {
 		css.add(this.getClass().getResource("style.css").toExternalForm());
 		
 		this.setBarStyle(bar, ColorStyle.GREEN);
-		bar.setMinSize(600, 50);
+		bar.setMinSize(500, 50);
 		bar.progressProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
@@ -53,9 +72,11 @@ public class Progress extends TilePane {
 			}
 			
 		});
-		
-		super.getChildren().add(this.bar);
+		super.add(this.score.getLevelLabel(), 0, 0);
+		super.add(this.bar, 1, 0);
+		super.add(this.score.getScoreLabel(), 2, 0);
 		super.setAlignment(Pos.CENTER);
+		super.setHgap(10);
 	}
 	
 }

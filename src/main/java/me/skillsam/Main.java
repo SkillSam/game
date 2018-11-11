@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -14,24 +13,27 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private MediaPlayer mediaPlayer;
+	private Progress progress;
+	private Score score;
 	private ArmImages armIm;
+	private BorderPane rootPane;
 	private int i;
 
 	public void start(Stage primaryStage) {
 		// create a DrawPane object. See DrawPane.java for details.
-		Buttons buttons = new Buttons();
-		Progress progress = new Progress();
+		this.score = new Score();
+		this.progress = new Progress(this.score);
 		
 		i = 0;
 		armIm = new ArmImages();
 		ArrayList<Image> aiList = armIm.getList();
+		
+		Buttons buttons = new Buttons(this);
 		Image currentAI = aiList.get(i);
-		ImageView imv = new ImageView(currentAI);
 		
 		// put gui on top of the rootPane
-		BorderPane rootPane = new BorderPane();
-		rootPane.setLeft(buttons);
-		rootPane.setCenter(imv);
+		rootPane = new BorderPane();
+		rootPane.setCenter(buttons);
 		rootPane.setTop(progress);
 
 		String sound = "src/main/resources/audio.mp3";
@@ -62,6 +64,14 @@ public class Main extends Application {
 	public ArmImages getAI()
 	{
 		return armIm;
+	}
+	
+	public Progress getProgress() {
+		return this.progress;
+	}
+	
+	public Score getScore() {
+		return this.score;
 	}
 	
 	public static void main(String[] args) {
