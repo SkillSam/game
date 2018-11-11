@@ -40,13 +40,13 @@ public class Main extends Application {
 		final Media file = new Media(new File(sound).toURI().toString());
 		mediaPlayer = new MediaPlayer(file);
 		mediaPlayer.setAutoPlay(true);
-		mediaPlayer.setVolume(0.3);
+		mediaPlayer.setVolume(0.1);
 
 		Runnable onEnd = new Runnable() {
 			public void run() {
 				mediaPlayer.dispose();
 				mediaPlayer = new MediaPlayer(file);
-				mediaPlayer.setVolume(0.05);
+				mediaPlayer.setVolume(0.1);
 				mediaPlayer.play();
 				mediaPlayer.setOnEndOfMedia(this);
 			}
