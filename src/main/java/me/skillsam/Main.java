@@ -12,9 +12,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private MediaPlayer mediaPlayer;
+	private ArmImages armIm;
 
 	public void start(Stage primaryStage) {
 		// create a DrawPane object. See DrawPane.java for details.
+		armIm = new ArmImages();
 		Buttons gui = new Buttons();
 		Progress progress = new Progress();
 		
@@ -47,6 +49,11 @@ public class Main extends Application {
 		primaryStage.show(); // Display the stage
 	}
 
+	public ArmImages getAI()
+	{
+		return armIm;
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
