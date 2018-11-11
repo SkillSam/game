@@ -32,6 +32,10 @@ public class Progress extends GridPane {
 		this.update();
 	}
 	
+	public double getEnergy() {
+		return this.energy;
+	}
+	
 	private void update() {
 		this.bar.setProgress(energy / maxEnergy);
 	}

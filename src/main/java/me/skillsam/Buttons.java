@@ -39,7 +39,7 @@ public class Buttons extends BorderPane {
 	private ToggleButton weight1, weight2, weight3, weight4, weight5;
 	
 	private long lastClick = 0;
-	private boolean isClick = false;
+	private boolean isClick = false, gameOver = false;
 
 	public Buttons(Main main) {
 		this.main = main;
@@ -158,6 +158,7 @@ public class Buttons extends BorderPane {
 
 		@Override
 		public void handle(MouseEvent event) {
+			if (gameOver) return;
 			view.setImage(armImages.get(armIndex - 1));
 			lastClick = System.currentTimeMillis();
 			isClick = false;
@@ -177,6 +178,7 @@ public class Buttons extends BorderPane {
 
 		@Override
 		public void handle(MouseEvent event) {
+			if (gameOver) return;
 			Object var = event.getSource();
 			ac.play();
 			isClick = true;
@@ -198,6 +200,12 @@ public class Buttons extends BorderPane {
 			} else if (var == weight5) {
 				this.progress.changeEnergy(-2.5 * multiplier);
 				this.score.addScore(25);
+			}
+			
+			if (progress.getEnergy() == 0) {
+				view.setImage(new Image(new File("src/main/resources/game_over.png").toURI().toString()));
+				gameOver = true;
+				return;
 			}
 
 			view.setImage(armImages.get(armIndex));
