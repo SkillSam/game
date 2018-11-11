@@ -67,6 +67,10 @@ public class Main extends Application {
 	public Score getScore() {
 		return this.score;
 	}
+	
+	public MediaPlayer getMediaPlayer() {
+		return mediaPlayer;
+	}
 
 	public static void main(String[] args) {
 		launch(args);
