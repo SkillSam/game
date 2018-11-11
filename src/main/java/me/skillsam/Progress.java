@@ -3,13 +3,11 @@ package me.skillsam;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.TilePane;
 
-public class Progress extends Pane {
+public class Progress extends TilePane {
 	
 	private ProgressBar bar;
 	
@@ -33,16 +31,11 @@ public class Progress extends Pane {
 	}
 	
 	public void start() {
-		VBox vbox = new VBox();
-		vbox.setAlignment(Pos.CENTER);
-		vbox.setPadding(new Insets(10));
-		
-		ObservableList<String> css = vbox.getStylesheets();
+		ObservableList<String> css = super.getStylesheets();
 		css.add(this.getClass().getResource("style.css").toExternalForm());
 		
 		this.setBarStyle(bar, ColorStyle.GREEN);
-		bar.setPrefWidth(600);
-		bar.setPrefHeight(50);
+		bar.setMinSize(600, 50);
 		bar.progressProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
@@ -61,7 +54,8 @@ public class Progress extends Pane {
 			
 		});
 		
-		vbox.getChildren().setAll(bar);
+		super.getChildren().add(this.bar);
+		super.setAlignment(Pos.CENTER);
 	}
 	
 }

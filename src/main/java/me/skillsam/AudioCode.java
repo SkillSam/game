@@ -17,7 +17,7 @@ public class AudioCode extends Application{
  		StackPane root = new StackPane();
 		
  		String sound = "src/main/resources/audio.mp3";
- 		Media file = new Media(new File(sound).toURI().toString());
+ 		final Media file = new Media(new File(sound).toURI().toString());
 		mediaPlayer = new MediaPlayer(file);
 		mediaPlayer.setAutoPlay(true);
 		
