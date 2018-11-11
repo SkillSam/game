@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
@@ -128,8 +129,10 @@ public class Buttons extends BorderPane {
 		weight5.setOnMouseReleased(armHandler);
 
 		tilePane.getChildren().addAll(weight1, weight2, weight3, weight4, weight5);
+		StackPane spane = new StackPane();
+		spane.getChildren().addAll(view, imvWow);
 		this.setLeft(tilePane);
-		this.setCenter(view);
+		this.setCenter(spane);
 		
 		Timeline clock = new Timeline(new KeyFrame(Duration.seconds(0.001), new EventHandler<ActionEvent>() {
 
