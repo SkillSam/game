@@ -1,10 +1,12 @@
 package me.skillsam;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -13,16 +15,23 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private MediaPlayer mediaPlayer;
 	private ArmImages armIm;
+	private int i;
 
 	public void start(Stage primaryStage) {
 		// create a DrawPane object. See DrawPane.java for details.
-		armIm = new ArmImages();
-		Buttons gui = new Buttons();
+		Buttons buttons = new Buttons();
 		Progress progress = new Progress();
+		
+		i = 0;
+		armIm = new ArmImages();
+		ArrayList<Image> aiList = armIm.getList();
+		Image currentAI = aiList.get(i);
+		ImageView imv = new ImageView(currentAI);
 		
 		// put gui on top of the rootPane
 		BorderPane rootPane = new BorderPane();
-		rootPane.setCenter(gui);
+		rootPane.setLeft(buttons);
+		rootPane.setCenter(imv);
 		rootPane.setTop(progress);
 
 		String sound = "src/main/resources/audio.mp3";
@@ -43,7 +52,7 @@ public class Main extends Application {
 
 
 		// Create a scene and place rootPane in the stage
-		Scene scene = new Scene(rootPane, 800, 600);
+		Scene scene = new Scene(rootPane, 900, 700);
 
 		primaryStage.setTitle("Shape Drawing");
 		primaryStage.setScene(scene); // Place the scene in the stage
