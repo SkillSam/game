@@ -41,6 +41,7 @@ public class Main extends Application {
 		mediaPlayer.setOnEndOfMedia(onEnd);
 		mediaPlayer.play();
 
+
 		// Create a scene and place rootPane in the stage
 		Scene scene = new Scene(rootPane, 800, 600);
 
