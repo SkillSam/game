@@ -33,6 +33,7 @@ public class Buttons extends BorderPane {
 	private ToggleButton weight1, weight2, weight3, weight4, weight5;
 	
 	private long lastClick = 0;
+	private boolean isClick = false;
 
 	public Buttons(Main main) {
 		this.main = main;
@@ -123,14 +124,14 @@ public class Buttons extends BorderPane {
 		this.setLeft(tilePane);
 		this.setCenter(view);
 		
-		Timeline clock = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
+		Timeline clock = new Timeline(new KeyFrame(Duration.seconds(0.001), new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				long diff = System.currentTimeMillis() - lastClick;
 				
-				if (diff > 2000) {
-					main.getProgress().changeEnergy(3);
+				if (diff > 2000 && !isClick) {
+					main.getProgress().changeEnergy(.005);
 				}
 			}
 			
@@ -146,6 +147,7 @@ public class Buttons extends BorderPane {
 		public void handle(MouseEvent event) {
 			view.setImage(armImages.get(armIndex - 1));
 			lastClick = System.currentTimeMillis();
+			isClick = false;
 		}
 
 	}
@@ -164,6 +166,7 @@ public class Buttons extends BorderPane {
 		public void handle(MouseEvent event) {
 			Object var = event.getSource();
 			ac.play();
+			isClick = true;
 
 			double multiplier = (double) (1.0 / this.score.getLevel());
 
