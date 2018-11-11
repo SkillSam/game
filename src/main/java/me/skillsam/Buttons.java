@@ -21,28 +21,34 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
 public class Buttons extends BorderPane {
+	private static final int INDEFINITE = 1000;
 	private ToggleGroup group;
 	private Main main;
 
 	private ImageView view;
 	private ArrayList<Image> armImages;
 
-	private AudioClip ac, cheer;
+	private AudioClip ac, cheer, normal, bassboost;
 	private ImageView imvWow;
 	private Image wowI;
-	private MediaPlayer mediaPlayer;
 	private boolean flag = false;
 
+	private String sound, sound2;
+	private Media file, file2;
+	private MediaPlayer mediaPlayer;
+	private MediaView mv;	
+	
 	private int armIndex = 1;
 
 	private ToggleButton weight1, weight2, weight3, weight4, weight5;
 	
-	private long lastClick = 0;
+	private long lastClick 	= 0;
 	private boolean isClick = false, gameOver = false;
 
 	public Buttons(Main main) {
@@ -50,13 +56,29 @@ public class Buttons extends BorderPane {
 		this.armImages = this.main.getAI().getList();
 		this.view = new ImageView(this.armImages.get(0));
 		group = new ToggleGroup();
-
+		
+		sound = "src/main/resources/audio.mp3";
+		sound2 = "src/main/resources/audio2.mp3";
+		file = new Media(new File(sound).toURI().toString());
+		file2 = new Media(new File(sound2).toURI().toString());
+		mediaPlayer = new MediaPlayer(file);
+		mediaPlayer.setCycleCount(INDEFINITE);
+		mediaPlayer.setVolume(0.1);
+		mediaPlayer.play();
+		
 		// sounds
 		ac = new AudioClip("file:src/main/resources/woosh.mp3");
-		ac.setVolume(0.5);
-
 		cheer = new AudioClip("file:src/main/resources/cheer.mp3");
-		cheer.setVolume(0.3);
+		normal = new AudioClip("file:src/main/resources/audio.mp3");
+		bassboost = new AudioClip("file:src/main/resources/audio2.mp3");
+		ac.setVolume(0.6);
+		cheer.setVolume(0.1);		
+		
+//		normal.setVolume(0.1);
+//		normal.setCycleCount(INDEFINITE);
+//		normal.play();
+//		bassboost.setCycleCount(10);
+//		bassboost.setVolume(0.4);
 		
 		imvWow = new ImageView();
 		File wow = new File("src/main/resources/wow.png");
@@ -212,22 +234,13 @@ public class Buttons extends BorderPane {
 				return;
 			}
 
-			if(score.getLevel() >= 4 && flag == false) {
-				flag = true;
-				String sound = "src/main/resources/audio2.mp3";
-				final Media file = new Media(new File(sound).toURI().toString());
-				mediaPlayer = main.getMediaPlayer();
-				Runnable onEnd = new Runnable() {
-					public void run() {
-						mediaPlayer.dispose();
-						mediaPlayer = new MediaPlayer(file);
-						mediaPlayer.setVolume(0.1);
-						mediaPlayer.play();
-						mediaPlayer.setOnEndOfMedia(this);
-					}
-				};
-				mediaPlayer.setOnEndOfMedia(onEnd);
+			if(score.getLevel() >= 3 && flag == false) {
+				mediaPlayer.stop();
+				mediaPlayer.dispose();
+				mediaPlayer = new MediaPlayer(file2);
+				mediaPlayer.setCycleCount(INDEFINITE);
 				mediaPlayer.play();
+				flag = true;
 			}
 			
 			view.setImage(armImages.get(armIndex));
