@@ -7,34 +7,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javafx.geometry.Insets;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.control.ToggleButton;
-import java.util.ArrayList;
-import java.io.File;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 
 
 public class Buttons extends BorderPane
 {
-	private RadioButton weight1, weight2, weight3, weight4, weight5;
 	private ToggleGroup group;
-	private ArrayList<Image> imageList;
-	private String lastPress;
-	private ImageView imv;
-	private File file, file2, file3, file4, file5, file6, file7, file8;
-	private Image image, image2, image3, image4, image5, image6,image7, image8;
 	
 	public Buttons()
 	{
