@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.media.AudioClip;
 
 public class Buttons extends BorderPane {
 	private ToggleGroup group;
@@ -20,6 +21,8 @@ public class Buttons extends BorderPane {
 	
 	private ImageView view;
 	private ArrayList<Image> armImages;
+	
+	private AudioClip ac, cheer;
 	
 	private int armIndex = 1;
 
@@ -30,6 +33,13 @@ public class Buttons extends BorderPane {
 		this.armImages = this.main.getAI().getList();
 		this.view = new ImageView(this.armImages.get(0));
 		group = new ToggleGroup();
+		
+		//sounds
+		ac = new AudioClip("file:src/main/resources/woosh.mp3");
+		ac.setVolume(0.5);
+		
+		cheer = new AudioClip("file:src/main/resources/cheer.mp3");
+		cheer.setVolume(0.3);
 
 		weight1 = new ToggleButton();
 		weight2 = new ToggleButton();
@@ -130,7 +140,8 @@ public class Buttons extends BorderPane {
 		@Override
 		public void handle(MouseEvent event) {
 			Object var = event.getSource();
-
+			ac.play();
+			
 			if (var == weight1) {
 				this.progress.changeEnergy(-0.5);
 				this.score.addScore(5);
@@ -151,6 +162,7 @@ public class Buttons extends BorderPane {
 			view.setImage(armImages.get(armIndex));
 			if (this.score.ifLevelUp()) {
 				armIndex += 2;
+				cheer.play();
 				
 				if (armIndex > armImages.size() - 1) armIndex = armImages.size() - 1;
 			}
