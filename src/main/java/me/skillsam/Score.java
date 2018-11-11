@@ -9,6 +9,8 @@ public class Score extends TilePane {
 
 	private int score = 0;
 	private int level = 1;
+	
+	private Font font;
 
 	private Label scoreLabel, levelLabel;
 
@@ -16,7 +18,7 @@ public class Score extends TilePane {
 		scoreLabel = new Label("Score: " + score);
 		levelLabel = new Label("Level: " + level);
 		
-		Font font = Font.font("Arial", FontWeight.BOLD, 15);
+		font = Font.font("Arial", FontWeight.BOLD, 15);
 		
 		this.scoreLabel.setFont(font);
 		this.levelLabel.setFont(font);
@@ -56,6 +58,14 @@ public class Score extends TilePane {
 
 	public Label getLevelLabel() {
 		return this.levelLabel;
+	}
+
+	public void restoreText() {
+		this.levelLabel.setText("Level: " + level);
+		this.scoreLabel.setText("Score: " + score);
+		
+		this.levelLabel.setFont(font);
+		this.scoreLabel.setFont(font);
 	}
 
 }

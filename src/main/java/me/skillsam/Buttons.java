@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -18,6 +19,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
 public class Buttons extends BorderPane {
@@ -202,7 +205,23 @@ public class Buttons extends BorderPane {
 				armIndex += 2;
 				cheer.play();
 				imvWow.setImage(wowI);
+				
+				Label editLevel = score.getLevelLabel();
+				editLevel.setText("LEVEL UP!");
+				editLevel.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 20));
+				
+				Timeline delay = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
+					@Override
+					public void handle(ActionEvent event) {
+						imvWow.setImage(null);
+						score.restoreText();
+					}
+					
+				}));
+				delay.setCycleCount(1);
+				delay.play();
+				
 				if (armIndex > armImages.size() - 1)
 					armIndex = armImages.size() - 1;
 			}
