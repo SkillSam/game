@@ -19,6 +19,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
@@ -33,6 +35,8 @@ public class Buttons extends BorderPane {
 	private AudioClip ac, cheer;
 	private ImageView imvWow;
 	private Image wowI;
+	private MediaPlayer mediaPlayer;
+	private boolean flag = false;
 
 	private int armIndex = 1;
 
@@ -208,6 +212,24 @@ public class Buttons extends BorderPane {
 				return;
 			}
 
+			if(score.getLevel() >= 4 && flag == false) {
+				flag = true;
+				String sound = "src/main/resources/audio2.mp3";
+				final Media file = new Media(new File(sound).toURI().toString());
+				mediaPlayer = main.getMediaPlayer();
+				Runnable onEnd = new Runnable() {
+					public void run() {
+						mediaPlayer.dispose();
+						mediaPlayer = new MediaPlayer(file);
+						mediaPlayer.setVolume(0.1);
+						mediaPlayer.play();
+						mediaPlayer.setOnEndOfMedia(this);
+					}
+				};
+				mediaPlayer.setOnEndOfMedia(onEnd);
+				mediaPlayer.play();
+			}
+			
 			view.setImage(armImages.get(armIndex));
 			if (this.score.ifLevelUp()) {
 				armIndex += 2;
