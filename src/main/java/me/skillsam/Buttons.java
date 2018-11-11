@@ -27,6 +27,8 @@ public class Buttons extends BorderPane {
 	private ArrayList<Image> armImages;
 
 	private AudioClip ac, cheer;
+	private ImageView imvWow;
+	private Image wowI;
 
 	private int armIndex = 1;
 
@@ -47,6 +49,11 @@ public class Buttons extends BorderPane {
 
 		cheer = new AudioClip("file:src/main/resources/cheer.mp3");
 		cheer.setVolume(0.3);
+		
+		imvWow = new ImageView();
+		File wow = new File("src/main/resources/wow.png");
+		wowI = new Image(wow.toURI().toString());
+		//imvWow.setImage(wowI);
 
 		weight1 = new ToggleButton();
 		weight2 = new ToggleButton();
@@ -191,6 +198,7 @@ public class Buttons extends BorderPane {
 			if (this.score.ifLevelUp()) {
 				armIndex += 2;
 				cheer.play();
+				imvWow.setImage(wowI);
 
 				if (armIndex > armImages.size() - 1)
 					armIndex = armImages.size() - 1;
