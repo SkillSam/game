@@ -41,6 +41,8 @@ public class Main extends Application
       primaryStage.setTitle("Shape Drawing"); 
       primaryStage.setScene(scene); // Place the scene in the stage
       primaryStage.show(); // Display the stage
+      
+      
    }
    public static void main(String[] args)
    {
